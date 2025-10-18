@@ -13,6 +13,30 @@ git init
 git clone https://github.com/junclemente/msads_capstone.git
 ```
 
+## Environment Setup
+
+This project uses a conda environment specified in a YAML file for
+reproducibility and consistent development. Ensure you have
+[Anaconda](https://www.anaconda.com/download) or
+[Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/main)
+installed.
+
+**Create the Environment**
+Run the following:
+
+```bash
+conda env create -f environment.yml
+```
+
+**Update the Environment (if needed)**
+If there are any updates to the environment, you can update the environment with the following:
+
+```bash
+conda env update -f environment.yml --prune
+```
+
+The `--prune` option cleans the environment by removing packages that are no longer required.
+
 # Project Intro / Objective
 
 The main purpose of this project is **\_\_\_\_**. Describe the goals of the project and potential
@@ -21,10 +45,9 @@ paragraph(s).
 
 # Partner(s)/Contributor(s)
 
-• [Name of Your Teammates]
-• Website for partner, if available.
-• Partner contact: [Name of Contact], and If you do not have a partner leave this section
-out
+- [Amayrani Balbuena](https://github.com/amayranib)
+- [Jun Clemente](https://github.com/junclemente)
+- [Tanya Ortega](https://github.com/tanyaort)
 
 # Methods Used
 
