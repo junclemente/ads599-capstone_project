@@ -1,0 +1,59 @@
+name: capstone
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  # Core Python environment
+  - python=3.11
+  - ipykernel
+  - jupyterlab
+  - notebook
+
+  # Data manipulation and analysis
+  - numpy
+  - pandas
+  - scipy
+
+  # Visualization
+  - matplotlib
+  - seaborn
+  - plotly
+
+  # Machine learning
+  - scikit-learn
+  - xgboost
+  - lightgbm
+
+  # Model evaluation and statistics
+  - statsmodels
+  - shap
+
+  # Data cleaning and wrangling
+  - openpyxl # Excel file support
+  - pyarrow # Parquet/Feather files
+  - xlrd # Older Excel formats
+  - requests # API or web data retrieval
+
+  # Text handling (optional, if needed for NLP)
+  - nltk
+  - textblob
+
+  # Notebook and visualization enhancements
+  - ipywidgets
+  - jinja2
+  - tqdm
+  - rich
+
+  # Utilities for project management
+  - black # Code formatter
+  - ruff # Linter
+  - isort # Import sorter
+  - pre-commit
+  - pip
+
+  # pip-only packages
+  - pip:
+      - nbstripout # Auto-remove notebook outputs before commits
+      - jupytext # Pair notebooks with .py scripts for version control
+      - ydata-profiling # Quick EDA profiling reports (replaces pandas-profiling)
