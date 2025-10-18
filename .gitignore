@@ -169,3 +169,11 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+
+#-----------------------------------------------------------------------------
+# Dataset folder
+#-----------------------------------------------------------------------------
+# The dataset files may be too large to store on github and therefore must
+# be downloaded separately. 
+data/raw
