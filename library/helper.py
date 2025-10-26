@@ -199,3 +199,17 @@ def clean_safety_by_connectedness(df_raw: pd.DataFrame) -> pd.DataFrame:
     )
 
     return df_clean
+
+
+def clean_columns(df):
+    """
+    Clean column names by removing newlines, excessive spaces,
+    and standardizing capitalization.
+    """
+    df = df.copy()
+    df.columns = (
+        df.columns.str.replace("\n", " ", regex=False)  # remove newline characters
+        .str.replace(r"\s+", " ", regex=True)  # collapse multiple spaces
+        .str.strip()  # trim leading/trailing spaces
+    )
+    return df
