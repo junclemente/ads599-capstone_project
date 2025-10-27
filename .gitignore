@@ -171,6 +171,14 @@ cython_debug/
 .pypirc
 
 
+# nbdime temp notebooks
+*_BACKUP_*.ipynb
+*_BASE_*.ipynb
+*_LOCAL_*.ipynb
+*_REMOTE_*.ipynb
+
+
+
 #-----------------------------------------------------------------------------
 # Dataset folder
 #-----------------------------------------------------------------------------
@@ -178,8 +186,3 @@ cython_debug/
 # be downloaded separately. 
 data/public_data
 
-# nbdime temp notebooks
-*_BACKUP_*.ipynb
-*_BASE_*.ipynb
-*_LOCAL_*.ipynb
-*_REMOTE_*.ipynb
