@@ -184,5 +184,6 @@ cython_debug/
 #-----------------------------------------------------------------------------
 # The dataset files may be too large to store on github and therefore must
 # be downloaded separately. 
+data/raw
 data/public_data
 
