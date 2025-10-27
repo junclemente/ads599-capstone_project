@@ -171,9 +171,19 @@ cython_debug/
 .pypirc
 
 
+# nbdime temp notebooks
+*_BACKUP_*.ipynb
+*_BASE_*.ipynb
+*_LOCAL_*.ipynb
+*_REMOTE_*.ipynb
+
+
+
 #-----------------------------------------------------------------------------
 # Dataset folder
 #-----------------------------------------------------------------------------
 # The dataset files may be too large to store on github and therefore must
 # be downloaded separately. 
 data/raw
+data/public_data
+
