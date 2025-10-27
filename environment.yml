@@ -51,6 +51,7 @@ dependencies:
   - isort # Import sorter
   - pre-commit
   - pip
+  - nbdime
 
   # pip-only packages
   - pip:
