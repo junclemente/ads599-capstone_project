@@ -213,3 +213,8 @@ def clean_columns(df):
         .str.strip()  # trim leading/trailing spaces
     )
     return df
+
+
+def rpkl(folder_path, filename):
+
+    return pd.read_pickle( folder_path / filename)
