@@ -215,6 +215,125 @@ def clean_columns(df):
     return df
 
 
-def rpkl(folder_path, filename):
+# def rpkl(folder_path, filename, show_cols=True):
+#     """
+#     Read and clean a pickle file into a standardized pandas DataFrame.
 
-    return pd.read_pickle( folder_path / filename)
+#     Parameters
+#     ----------
+#     folder_path : Path or str
+#         Folder containing the pickle file.
+#     filename : str
+#         Name of the pickle file.
+#     show_cols : bool, default=True
+#         Whether to print the cleaned column list.
+
+#     Returns
+#     -------
+#     pd.DataFrame
+#         Cleaned DataFrame with standardized column names.
+#     """
+#     # Read pickle file
+#     df = pd.read_pickle(folder_path / filename)
+
+#     # Clean column names
+#     df.columns = (
+#         df.columns
+#         .str.strip()             # remove leading/trailing spaces
+#         .str.lower()             # lowercase
+#         .str.replace(r"\s+", "_", regex=True)  # replace whitespace with _
+#         .str.replace(r"[^\w_]", "", regex=True) # remove non-alphanumeric chars
+#     )
+
+#     # Print columns for quick inspection
+#     if show_cols:
+#         display(df.columns.tolist())
+
+#     return df
+
+
+# def build_cdscode(df, county_col, district_col, school_col):
+#     cdscode = ( 
+#         df[county_col].astype(str).str.zfill(2) +
+#         df[district_col].astype(str).str.zfill(5) + 
+#         df[school_col].astype(str).str.zfill(7))
+    
+#     return cdscode 
+    
+
+import pandas as pd
+
+def rpkl(folder_path, filename, show_cols=True):
+    """
+    Read, clean, and standardize a pickle file into a pandas DataFrame.
+
+    - Converts column names to lowercase, underscores, and removes spaces.
+    - Automatically builds a 'cdscode' column if not present and if possible.
+    - Optionally prints the cleaned column list.
+
+    Parameters
+    ----------
+    folder_path : Path or str
+        Folder containing the pickle file.
+    filename : str
+        Name of the pickle file.
+    show_cols : bool, default=True
+        Whether to print the cleaned column list.
+
+    Returns
+    -------
+    pd.DataFrame
+        Cleaned DataFrame with standardized column names and optional 'cdscode'.
+    """
+
+    # --- Load pickle ---
+    df = pd.read_pickle(folder_path / filename)
+
+    # --- Clean column names ---
+    df.columns = (
+        df.columns
+        .str.strip()
+        .str.lower()
+        .str.replace(r"\s+", "_", regex=True)
+        .str.replace(r"[^\w_]", "", regex=True)
+    )
+
+    # --- Check if 'cdscode' already exists ---
+    if "cdscode" not in df.columns:
+        def find_col(options):
+            for c in options:
+                if c in df.columns:
+                    return c
+            return None
+
+        county_col = find_col(["county_code", "countycode"])
+        district_col = find_col(["district_code", "districtcode"])
+        school_col = find_col(["school_code", "schoolcode"])
+
+        if all([county_col, district_col, school_col]):
+            df["cdscode"] = (
+                df[county_col].astype(str).str.zfill(2)
+                + df[district_col].astype(str).str.zfill(5)
+                + df[school_col].astype(str).str.zfill(7)
+            )
+            print(f"✅ Added 'cdscode' using: {county_col}, {district_col}, {school_col}")
+        else:
+            missing = [
+                name
+                for name, col in zip(
+                    ["county", "district", "school"],
+                    [county_col, district_col, school_col],
+                )
+                if col is None
+            ]
+            print(f"⚠️ Could not build 'cdscode' (missing {', '.join(missing)})")
+    else:
+        print("ℹ️ 'cdscode' already exists — skipping creation")
+
+    # --- Optionally print columns ---
+    if show_cols:
+        print(f"\n📁 Columns in {filename}:")
+        print(df.columns.tolist())
+
+    return df
+
