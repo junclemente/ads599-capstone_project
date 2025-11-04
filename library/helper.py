@@ -213,3 +213,177 @@ def clean_columns(df):
         .str.strip()  # trim leading/trailing spaces
     )
     return df
+
+
+# def rpkl(folder_path, filename, show_cols=True):
+#     """
+#     Read and clean a pickle file into a standardized pandas DataFrame.
+
+#     Parameters
+#     ----------
+#     folder_path : Path or str
+#         Folder containing the pickle file.
+#     filename : str
+#         Name of the pickle file.
+#     show_cols : bool, default=True
+#         Whether to print the cleaned column list.
+
+#     Returns
+#     -------
+#     pd.DataFrame
+#         Cleaned DataFrame with standardized column names.
+#     """
+#     # Read pickle file
+#     df = pd.read_pickle(folder_path / filename)
+
+#     # Clean column names
+#     df.columns = (
+#         df.columns
+#         .str.strip()             # remove leading/trailing spaces
+#         .str.lower()             # lowercase
+#         .str.replace(r"\s+", "_", regex=True)  # replace whitespace with _
+#         .str.replace(r"[^\w_]", "", regex=True) # remove non-alphanumeric chars
+#     )
+
+#     # Print columns for quick inspection
+#     if show_cols:
+#         display(df.columns.tolist())
+
+#     return df
+
+
+# def build_cdscode(df, county_col, district_col, school_col):
+#     cdscode = ( 
+#         df[county_col].astype(str).str.zfill(2) +
+#         df[district_col].astype(str).str.zfill(5) + 
+#         df[school_col].astype(str).str.zfill(7))
+    
+#     return cdscode 
+    
+
+import pandas as pd
+
+def rpkl(folder_path, filename, show_cols=True):
+    """
+    Read, clean, and standardize a pickle file into a pandas DataFrame.
+
+    - Converts column names to lowercase, underscores, and removes spaces.
+    - Automatically builds a 'cdscode' column if not present and if possible.
+    - Optionally prints the cleaned column list.
+
+    Parameters
+    ----------
+    folder_path : Path or str
+        Folder containing the pickle file.
+    filename : str
+        Name of the pickle file.
+    show_cols : bool, default=True
+        Whether to print the cleaned column list.
+
+    Returns
+    -------
+    pd.DataFrame
+        Cleaned DataFrame with standardized column names and optional 'cdscode'.
+    """
+
+    # --- Load pickle ---
+    df = pd.read_pickle(folder_path / filename)
+
+    # --- Clean column names ---
+    df.columns = (
+        df.columns
+        .str.strip()
+        .str.lower()
+        .str.replace(r"\s+", "_", regex=True)
+        .str.replace(r"[^\w_]", "", regex=True)
+    )
+
+    # --- Check if 'cdscode' already exists ---
+    if "cdscode" not in df.columns:
+        def find_col(options):
+            for c in options:
+                if c in df.columns:
+                    return c
+            return None
+
+        county_col = find_col(["county_code", "countycode"])
+        district_col = find_col(["district_code", "districtcode"])
+        school_col = find_col(["school_code", "schoolcode"])
+
+        if all([county_col, district_col, school_col]):
+            df["cdscode"] = (
+                df[county_col].astype(str).str.zfill(2)
+                + df[district_col].astype(str).str.zfill(5)
+                + df[school_col].astype(str).str.zfill(7)
+            )
+            print(f"✅ Added 'cdscode' using: {county_col}, {district_col}, {school_col}")
+        else:
+            missing = [
+                name
+                for name, col in zip(
+                    ["county", "district", "school"],
+                    [county_col, district_col, school_col],
+                )
+                if col is None
+            ]
+            print(f"⚠️ Could not build 'cdscode' (missing {', '.join(missing)})")
+    else:
+        print("ℹ️ 'cdscode' already exists — skipping creation")
+
+    # --- Optionally print columns ---
+    if show_cols:
+        print(f"\n📁 Columns in {filename}:")
+        print(df.columns.tolist())
+
+    return df
+
+def create_county_fr_geography(df, column="geography"):
+    df["county"] = (
+        df[column]
+        .str.replace(" County", "", regex=False)
+        .str.strip()
+    )
+
+    return df 
+
+def create_safety_connectedness_features(df):
+    """
+    Create composite School Safety and Connectedness metrics from CalSCHLS county data.
+    Expects columns: county, connectedness_level, very_safe, safe, neither, unsafe, very_unsafe (in % values)
+    Returns: DataFrame with county-level features ready to merge with your main dataset.
+    """
+    # make sure percentages are numeric
+    pct_cols = ["very_safe", "safe", "neither", "unsafe", "very_unsafe"]
+    df[pct_cols] = df[pct_cols].replace("%", "", regex=True).astype(float)
+
+    # convert levels to numeric weights
+    level_weight = {"High": 3, "Medium": 2, "Low": 1}
+    df["level_weight"] = df["connectedness"].map(level_weight)
+
+    # compute safety score within each row (1–5 scale)
+    df["safety_score"] = (
+        df["very_safe"] * 5
+        + df["safe"] * 4
+        + df["neither"] * 3
+        + df["unsafe"] * 2
+        + df["very_unsafe"] * 1
+    ) / 100
+
+    # now aggregate to county level
+    agg = (
+        df.groupby("county")
+        .agg(
+            avg_safety_score=("safety_score", "mean"),
+            high_conn=("connectedness", lambda x: np.mean(x == "High")),
+            low_conn=("connectedness", lambda x: np.mean(x == "Low")),
+        )
+        .reset_index()
+    )
+
+    # compute connectedness ratio and climate index
+    agg["conn_ratio"] = agg["high_conn"] / (agg["low_conn"] + 1e-6)
+    agg["school_climate_index"] = (agg["avg_safety_score"] * 0.5) + (
+        agg["conn_ratio"] / agg["conn_ratio"].max() * 0.5
+    )
+
+    return agg
