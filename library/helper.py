@@ -337,3 +337,53 @@ def rpkl(folder_path, filename, show_cols=True):
 
     return df
 
+def create_county_fr_geography(df, column="geography"):
+    df["county"] = (
+        df[column]
+        .str.replace(" County", "", regex=False)
+        .str.strip()
+    )
+
+    return df 
+
+def create_safety_connectedness_features(df):
+    """
+    Create composite School Safety and Connectedness metrics from CalSCHLS county data.
+    Expects columns: county, connectedness_level, very_safe, safe, neither, unsafe, very_unsafe (in % values)
+    Returns: DataFrame with county-level features ready to merge with your main dataset.
+    """
+    # make sure percentages are numeric
+    pct_cols = ["very_safe", "safe", "neither", "unsafe", "very_unsafe"]
+    df[pct_cols] = df[pct_cols].replace("%", "", regex=True).astype(float)
+
+    # convert levels to numeric weights
+    level_weight = {"High": 3, "Medium": 2, "Low": 1}
+    df["level_weight"] = df["connectedness"].map(level_weight)
+
+    # compute safety score within each row (1–5 scale)
+    df["safety_score"] = (
+        df["very_safe"] * 5
+        + df["safe"] * 4
+        + df["neither"] * 3
+        + df["unsafe"] * 2
+        + df["very_unsafe"] * 1
+    ) / 100
+
+    # now aggregate to county level
+    agg = (
+        df.groupby("county")
+        .agg(
+            avg_safety_score=("safety_score", "mean"),
+            high_conn=("connectedness", lambda x: np.mean(x == "High")),
+            low_conn=("connectedness", lambda x: np.mean(x == "Low")),
+        )
+        .reset_index()
+    )
+
+    # compute connectedness ratio and climate index
+    agg["conn_ratio"] = agg["high_conn"] / (agg["low_conn"] + 1e-6)
+    agg["school_climate_index"] = (agg["avg_safety_score"] * 0.5) + (
+        agg["conn_ratio"] / agg["conn_ratio"].max() * 0.5
+    )
+
+    return agg
