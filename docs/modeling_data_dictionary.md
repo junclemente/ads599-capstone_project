@@ -1,0 +1,46 @@
+Absolutely 👍 — here’s a well-structured **data dictionary** for your **modeling dataset** based on the columns you listed and their original source definitions (primarily from the **California Department of Education’s ACGR dataset**, **CalSCHLS**, and supporting staff/FRPM datasets you’ve been integrating).
+
+---
+
+## 📘 **Data Dictionary: Modeling Dataset**
+
+| **Feature**                               | **Source**                         | **Type**         | **Description**                                                                                      | **Analytical Purpose**                                        |
+| ----------------------------------------- | ---------------------------------- | ---------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| `cohortstudents`                          | CDE ACGR                           | Numeric          | Total number of students entering grade 9 for the first time, adjusted for transfers and exclusions. | Normalization factor for rate-based variables.                |
+| `graduation_rate`                         | CDE ACGR                           | Numeric (Target) | Percentage of cohort students earning a regular high school diploma within four years.               | 🎯 **Target variable** for regression modeling.               |
+| `met_uccsu_grad_reqs_rate`                | CDE ACGR                           | Numeric          | Percent of graduates meeting UC/CSU “A–G” admission requirements.                                    | Academic rigor and college readiness indicator.               |
+| `seal_of_biliteracy_rate`                 | CDE ACGR                           | Numeric          | Percent of graduates earning the State Seal of Biliteracy for proficiency in two or more languages.  | Proxy for academic excellence and language equity.            |
+| `still_enrolled_rate`                     | CDE ACGR                           | Numeric          | Percent of cohort still enrolled after four years without graduating.                                | Indicates delayed completion or risk of non-graduation.       |
+| `chronicabsenteeismrate`                  | CDE Attendance/Chronic Absenteeism | Numeric          | Percent of students missing 10% or more instructional days in a school year.                         | Attendance-based **Early Warning System** (EWS) indicator.    |
+| `unexcused_absences_percent`              | CalSCHLS / Local Attendance        | Numeric          | Percent of absences classified as unexcused.                                                         | Behavioral risk indicator tied to engagement.                 |
+| `outofschool_suspension_absences_percent` | CRDC / CalSCHLS                    | Numeric          | Percent of absences due to out-of-school suspensions.                                                | Reflects behavioral and disciplinary environment.             |
+| `percent__eligible_free_k12`              | CDE FRPM                           | Numeric          | Percent of students eligible for free or reduced-price meals (K–12).                                 | Socioeconomic indicator of student disadvantage.              |
+| `frpm_count_k12`                          | CDE FRPM                           | Numeric          | Total number of FRPM-eligible students (K–12).                                                       | Used for scaling or normalization of economic disadvantage.   |
+| `stu_tch_ratio`                           | CDE Staff Assignment               | Numeric          | Student-to-teacher ratio.                                                                            | Reflects classroom size and instructional quality proxy.      |
+| `stu_adm_ratio`                           | CDE Staff Assignment               | Numeric          | Student-to-administrator ratio.                                                                      | Leadership load indicator.                                    |
+| `stu_psv_ratio`                           | CDE Staff Assignment               | Numeric          | Student-to-pupil services staff (counselors, psychologists) ratio.                                   | Access to student support resources.                          |
+| `pct_associate`                           | CDE Staff Experience Data          | Numeric          | Percent of teachers with an associate degree.                                                        | Proxy for teacher qualification level.                        |
+| `pct_bachelors`                           | CDE Staff Experience Data          | Numeric          | Percent of teachers holding a bachelor’s degree.                                                     | Staff education baseline indicator.                           |
+| `pct_bachelors_plus`                      | CDE Staff Experience Data          | Numeric          | Percent of teachers with post-baccalaureate coursework (beyond BA).                                  | Reflects professional development progress.                   |
+| `pct_master`                              | CDE Staff Experience Data          | Numeric          | Percent of teachers with a master’s degree.                                                          | Advanced teacher qualification indicator.                     |
+| `pct_master_plus`                         | CDE Staff Experience Data          | Numeric          | Percent of teachers with postgraduate or specialist credentials.                                     | Reflects high-level staff academic attainment.                |
+| `pct_doctorate`                           | CDE Staff Experience Data          | Numeric          | Percent of teachers with a doctoral degree.                                                          | Advanced academic attainment; small sample, high variance.    |
+| `pct_juris_doctor`                        | CDE Staff Experience Data          | Numeric          | Percent of teachers with a Juris Doctor degree (law).                                                | Rare credential; may reflect leadership or specialized staff. |
+| `pct_no_degree`                           | CDE Staff Experience Data          | Numeric          | Percent of teachers without a completed degree.                                                      | Teacher qualification risk factor.                            |
+| `pct_experienced`                         | CDE Staff Assignment               | Numeric          | Percent of teachers with ≥3 years of teaching experience.                                            | Teacher quality and stability indicator.                      |
+| `pct_second_year`                         | CDE Staff Assignment               | Numeric          | Percent of teachers in their 2nd year of teaching.                                                   | Indicates proportion of early-career teachers.                |
+| `grade_retention_ratio`                   | CDE Student Performance            | Numeric          | Percent of students repeating a grade level.                                                         | Academic risk indicator; early dropout warning signal.        |
+| `pct_senior_cohort`                       | CDE Enrollment                     | Numeric          | Percent of total enrollment represented by grade 12 students.                                        | Reflects school size composition and retention patterns.      |
+| `school_climate_index`                    | CalSCHLS                           | Numeric          | Composite index (0–100) measuring safety, connectedness, and engagement.                             | School environment & engagement predictor.                    |
+| `high_grad_rate`                          | Derived Feature                    | Binary (0/1)     | 1 = Graduation rate > 80%, 0 = ≤ 80%.                                                                | Classification target for EDA and feature correlation.        |
+
+---
+
+### 🧩 Notes:
+
+* All features are **school-level** (not county-level) aggregates.
+* Missing data were median-imputed for numeric variables and dropped for the target (`graduation_rate`).
+* Highly correlated features (`avg_safety_score`, `pct_inexperienced`, etc.) were removed prior to modeling.
+* Socioeconomic, staff quality, and engagement variables align with the **ABC framework** (Attendance, Behavior, Course performance).
+
+---
