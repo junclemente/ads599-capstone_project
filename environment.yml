@@ -19,6 +19,8 @@ dependencies:
   - matplotlib
   - seaborn
   - plotly
+  - altair          # Needed for certain Streamlit charts
+  - bokeh           # Optional for interactive charts
 
   # Machine learning
   - scikit-learn
@@ -29,32 +31,51 @@ dependencies:
   - statsmodels
   - shap
 
-  # Data cleaning and wrangling
-  - openpyxl # Excel file support
-  - pyarrow # Parquet/Feather files
-  - xlrd # Older Excel formats
-  - requests # API or web data retrieval
+  # Data persistence, serialization, and IO
+  - joblib          # For saving/loading models
+  - cloudpickle     # Compatible with sklearn pipelines
+  - openpyxl        # Excel file support
+  - pyarrow         # Parquet/Feather
+  - xlrd            # Legacy Excel
+  - requests        # Web/API access
 
-  # Text handling (optional, if needed for NLP)
+  # Text handling / NLP (if needed)
   - nltk
   - textblob
 
-  # Notebook and visualization enhancements
+  # General utilities
   - ipywidgets
   - jinja2
   - tqdm
   - rich
+  - pyyaml
 
-  # Utilities for project management
-  - black # Code formatter
-  - ruff # Linter
-  - isort # Import sorter
+  # Development, linting, formatting
+  - black
+  - ruff
+  - isort
   - pre-commit
+
+  # Git / Notebook management
   - pip
   - nbdime
 
+  # Streamlit and web app dependencies
+  - streamlit
+  - watchdog            # Prevents reload issues on mac/linux
+  - uvicorn             # (optional) useful for local API serving
+  - aiohttp             # Backend async dependencies
+  - python-dotenv       # For any environment variables or secrets
+  - pillow              # For loading images/logos in the app
+
+  # Optional but commonly used with Streamlit
+  - regex               # Better text parsing if needed
+  - pandas-profiling    # Optional, if you want profiling inside app
+
   # pip-only packages
   - pip:
-      - nbstripout # Auto-remove notebook outputs before commits
-      - jupytext # Pair notebooks with .py scripts for version control
-      - ydata-profiling # Quick EDA profiling reports (replaces pandas-profiling)
+      - nbstripout
+      - jupytext
+      - ydata-profiling
+      - streamlit-option-menu   # Great sidebar navigation
+      - plotly-express          # Explicit package (used in charts)
