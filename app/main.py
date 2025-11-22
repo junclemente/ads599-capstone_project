@@ -1,4 +1,21 @@
+# import libraries 
 import streamlit as st
+import joblib 
+import pandas as pd 
+
+from pathlib import Path 
+
+# set paths 
+BASE_DIR = Path(__file__).resolve().parent 
+
+print(BASE_DIR)
+MODEL_PATH = BASE_DIR / "../models/random_forest_ews.pkl"
+FEATURE_PATH = BASE_DIR / "../models/top_features.pkl"
+
+# load models/features
+model = joblib.load(MODEL_PATH)
+top_features = joblib.load(FEATURE_PATH)
+
 
 # ----------------------------------------------------
 # Streamlit App Configuration
@@ -26,6 +43,13 @@ This app will eventually allow users to:
 
 For now, this is a simple starter page to verify the app structure and deployment environment.
 """)
+
+# ----------------------------------------------------
+# Top Features
+# ----------------------------------------------------
+
+st.subheader("Top Features Used by Model")
+st.write(top_features)
 
 # ----------------------------------------------------
 # Demo Section
