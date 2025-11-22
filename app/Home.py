@@ -40,7 +40,7 @@ left, right = st.columns([1.4, 1.6], vertical_alignment="top")
 
 with right:
     img_path = ASSETS_DIR /"abcs_input_sliders.png"
-    st.image(str(img_path), caption="ABCS input categories used for prediction", use_container_width=True)
+    st.image(str(img_path), caption="ABCS input categories used for prediction", width="stretch")
 
 with left:
     st.markdown(
