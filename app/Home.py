@@ -1,7 +1,10 @@
 # import libraries 
 import streamlit as st
-from pathlib import Path 
 
+from utils.paths import get_paths
+
+paths = get_paths()
+ASSETS_DIR = paths["ASSETS_DIR"]
 
 st.set_page_config(page_title="California EWS", page_icon="🎓", layout="wide")
 
@@ -36,7 +39,7 @@ st.header("How the ABCS Inputs Work")
 left, right = st.columns([1.4, 1.6], vertical_alignment="top")
 
 with right:
-    img_path = Path("app/assets/abcs_input_sliders.png")
+    img_path = ASSETS_DIR /"abcs_input_sliders.png"
     st.image(str(img_path), caption="ABCS input categories used for prediction", use_container_width=True)
 
 with left:

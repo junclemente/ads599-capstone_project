@@ -4,7 +4,10 @@ import joblib
 import pandas as pd 
 
 from pathlib import Path 
+from utils.paths import get_paths
 
+paths = get_paths()
+MODELS_DIR = paths["MODELS_DIR"]
 
 
 st.set_page_config(page_title="ABCS Predictors", layout="wide")
@@ -12,16 +15,16 @@ st.title("ABCS Predictor Inputs")
 
 
 
-# set paths - notebooks AND .py scripts
-if "__file__" in globals():
-    BASE_DIR = Path(__file__).resolve().parent
-else:
-    BASE_DIR = Path.cwd()
+# # set paths - notebooks AND .py scripts
+# if "__file__" in globals():
+#     BASE_DIR = Path(__file__).resolve().parent
+# else:
+#     BASE_DIR = Path.cwd()
 
 
 # print(BASE_DIR)
-MODEL_PATH = BASE_DIR / "../../models/random_forest_ews.pkl"
-FEATURE_PATH = BASE_DIR / "../../models/top_features.pkl"
+MODEL_PATH = MODELS_DIR / "random_forest_ews.pkl"
+FEATURE_PATH = MODELS_DIR / "top_features.pkl"
 
 # load models/features
 top_features = joblib.load(FEATURE_PATH)
