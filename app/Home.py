@@ -10,14 +10,13 @@ st.set_page_config(page_title="California EWS", page_icon="🎓", layout="wide")
 
 
 # header
-st.title("🎓 California Early Warning System (EWS)")
+st.title("🎓 California High School Early Warning System (EWS)")
 st.subheader("Capstone Project — Prototype Web App")
 
 st.write(
     """
     Welcome to the prototype of our **Early Warning System** model fo California public high schools. 
-    This tool uses statewide indicators aligned to the **ABC framework** — **Attendance**, **Behavior/Climate**, and  
-    **Course Performance** — to identify schools at risk of low graduation outcomes.
+    This tool uses statewide indicators aligned to the **ABC framework** — **Attendance**, **Behavior/Climate**, and **Course Performance** — to identify schools at risk of low graduation outcomes.
     """
 )         
 
@@ -76,11 +75,10 @@ st.info(
 st.divider()
 st.header("Coming Soon")
 st.info("""
-🔧 **Upcoming features we will add next:**
+🔧 **Potential upcoming features we will add next:**
 
-- Load the final XGBoost model  
-- School-level prediction form (FRPM, absenteeism, safety scores, etc.)  
 - Data explorer dashboard  
+- Data dictionary
 - Feature importance visualizations  
 - County or district lookup tools  
 """)
