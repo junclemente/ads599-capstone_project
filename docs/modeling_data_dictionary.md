@@ -1,7 +1,3 @@
-Absolutely 👍 — here’s a well-structured **data dictionary** for your **modeling dataset** based on the columns you listed and their original source definitions (primarily from the **California Department of Education’s ACGR dataset**, **CalSCHLS**, and supporting staff/FRPM datasets you’ve been integrating).
-
----
-
 ## 📘 **Data Dictionary: Modeling Dataset**
 
 | **Feature**                               | **Source**                         | **Type**         | **Description**                                                                                      | **Analytical Purpose**                                        |

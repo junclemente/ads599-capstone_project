@@ -1,60 +1,37 @@
-name: capstone
+name: capstone-app
 channels:
   - conda-forge
-  - defaults
-
 dependencies:
-  # Core Python environment
+  # Core
   - python=3.11
-  - ipykernel
-  - jupyterlab
-  - notebook
+  - pip
 
-  # Data manipulation and analysis
+  # Streamlit runtime
+  - streamlit
+  - watchdog         # helps hot-reload + avoids file watcher issues
+  - python-dotenv    # if you load secrets locally
+  - pillow           # images/logos
+  - requests         # if you fetch anything
+
+  # Data / IO
   - numpy
   - pandas
-  - scipy
+  - pyarrow
+  - openpyxl
+  - cloudpickle      # safe for sklearn pipeline loading
+  - joblib           # model + feature loading
 
-  # Visualization
+  # Modeling libs your app loads/uses
+  - scikit-learn
+  - statsmodels
   - matplotlib
   - seaborn
   - plotly
 
-  # Machine learning
-  - scikit-learn
-  - xgboost
-  - lightgbm
-
-  # Model evaluation and statistics
-  - statsmodels
-  - shap
-
-  # Data cleaning and wrangling
-  - openpyxl # Excel file support
-  - pyarrow # Parquet/Feather files
-  - xlrd # Older Excel formats
-  - requests # API or web data retrieval
-
-  # Text handling (optional, if needed for NLP)
-  - nltk
-  - textblob
-
-  # Notebook and visualization enhancements
-  - ipywidgets
-  - jinja2
-  - tqdm
-  - rich
-
-  # Utilities for project management
-  - black # Code formatter
-  - ruff # Linter
-  - isort # Import sorter
-  - pre-commit
-  - pip
-  - nbdime
-
-  # pip-only packages
+  # pip-only (or safer via pip on Cloud)
   - pip:
-      - nbstripout # Auto-remove notebook outputs before commits
-      - jupytext # Pair notebooks with .py scripts for version control
-      - ydata-profiling # Quick EDA profiling reports (replaces pandas-profiling)
+      - xgboost
+      - lightgbm
+      - shap
+      - streamlit-option-menu
+      - plotly-express

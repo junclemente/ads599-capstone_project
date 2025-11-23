@@ -71,6 +71,3 @@ Each feature includes its source, data type, a concise description, and its anal
 - Final dataset: **1,067 schools × 49 variables**.  
 
 ---
-
-_Last updated: 03 November 2025_  
-_Created by: Amayrani Balbuena, Jun Clemente, and Tanya Ortega_  
