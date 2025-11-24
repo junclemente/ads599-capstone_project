@@ -1,6 +1,8 @@
-# Project Title
+# 🚀 California School-Level Early Warning System (EWS) for Predicting Graduation Outcomes
 
 This project is a part of the ADS-599 course in the Applied Data Science Program at the University of San Diego.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
 -- **Project Status: Planned**
 
@@ -39,9 +41,9 @@ The `--prune` option cleans the environment by removing packages that are no lon
 
 # Project Intro / Objective
 
-The main purpose of this project is to develop a school-level Early Warning System (EWS) that predicts which California public high schools are at risk of low graduation outcomes using only publicly available, non-PII education datasets. Unlike traditionaly EWS system that include sensitive student-level identifiers which are protected under FERPA, this project shows that meaninful early-warning signals can be derived entirely from open data aligned to the ABC framework: Attendance (A), Behavior (B), and Course performance (C).   
+The main purpose of this project is to develop a school-level Early Warning System (EWS) that identifies California public high schools at risk of low graduation outcomes using only public, non-PII datasets. By leveraging statewide indicators aligned with the ABC framework—Attendance, Behavior, and Course performance—this project demonstrates that actionable early-warning signals can be generated without relying on restricted student-level records.
 
-This work aims to give California educators, policy makers, and district leaders a scalable way to monitor emerging risk, identify structure inequities, and support strategic resource allocation. The project also contributes to the research gap on school-level predictors of graduation outcomes and evaluates whether open data can approximate the predictive capability of student-level systems.
+The goal is to provide California educators, policymakers, and district leaders with a scalable, transparent, and privacy-preserving tool for monitoring emerging risk, understanding systemic inequities, and supporting data-informed planning and resource allocation.
 
 # Partner(s)/Contributor(s)
 
@@ -51,42 +53,41 @@ This work aims to give California educators, policy makers, and district leaders
 
 # Methods Used
 
-A few examples are:
-• Inferential Statistics
-• Data Mining
-• Predictive Modeling
-• Machine Learning
-• Data Visualization
-• Data Engineering
-• Text Mining
-• Programming
-• Data Manipulation
-• Case Studies
-• etc.
+- Data Cleaning & Preprocessing
+- Exploratory Data Analysis (EDA)
+- Feature Engineering
+- Predictive Modeling and Machine Learning Classification
+- Feature Selection using Random Forest
+- Data Visualization
 
 # Technologies
 
-A few examples are:
-• Python
-• R
-• SQL
-• PostGres, MySql
-• HTML
-• JavaScript
-• etc.
+- Python
+- Pandas 
+- Numpy 
+- Matplotlib, Seaborn
+- Jupyter Notebook / VSCode
+- Streamlit
+- Conda
+- Git / Github
 
 # Project Description
 
-Discuss the details of project overview. Description your selected dataset, such as data source,
-number of variables, size of dataset, etc. Include data dictionary if, available. Provide questions
-and hypothesis that you are exploring. What specific data analysis, visualization, and modeling
-work are you using to solve the problem? What roadblocks and challenges are you facing? etc.
+This project develops a simplified Early Warning System (EWS) that predicts high-school graduation outcomes using only publicly accessible datasets from the California Department of Education (CDE). Using 2021–22 school-level indicators—such as graduation rates, chronic absenteeism, FRPM eligibility, teacher experience, and school characteristics—combined with county-level climate data, we built a cleaned modeling dataset of 958 schools and 25 predictors. A binary target (“At Risk” < 90% graduation rate) highlighted a 26.3% minority class, and analysis confirmed strong ABC-aligned patterns between absenteeism, socioeconomic disadvantage, teacher experience, and graduation outcomes. Multiple machine learning models were evaluated with PR-AUC, Precision, Recall, and F1 due to class imbalance; Random Forest and Logistic Regression performed best, with top predictors including chronic absenteeism, unexcused absences, FRPM eligibility, still-enrolled rate, and A–G completion rate. Key challenges included inconsistent county reporting, FERPA-related suppression, and missing climate indicators, though all data were aggregate and fully public.
 
 # License
 
-You can add under what license your project is. As a good practice, add LICENSE file in your
-project folder as well.
+This project is licensed under the [MIT License](./LICENSE).
 
 # Acknowledgments
 
 You can mention and thank those who technically helped you during the project.
+
+# 🤖 AI Assistance Disclosure 
+
+Parts of this project were developed with the help from ChatGPT (OpenAI):
+- Debugging Python functions and pipeline logic
+- Drafting / rewriting docstrings and short notebook summaries 
+- Creating small code snippets
+
+All generated code and text were reviewed and edited by the authors. 
