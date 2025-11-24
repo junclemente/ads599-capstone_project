@@ -1,37 +1,81 @@
-name: capstone-app
+name: capstone
 channels:
   - conda-forge
+  - defaults
+
 dependencies:
-  # Core
+  # Core Python environment
   - python=3.11
-  - pip
+  - ipykernel
+  - jupyterlab
+  - notebook
 
-  # Streamlit runtime
-  - streamlit
-  - watchdog         # helps hot-reload + avoids file watcher issues
-  - python-dotenv    # if you load secrets locally
-  - pillow           # images/logos
-  - requests         # if you fetch anything
-
-  # Data / IO
+  # Data manipulation and analysis
   - numpy
   - pandas
-  - pyarrow
-  - openpyxl
-  - cloudpickle      # safe for sklearn pipeline loading
-  - joblib           # model + feature loading
+  - scipy
 
-  # Modeling libs your app loads/uses
-  - scikit-learn
-  - statsmodels
+  # Visualization
   - matplotlib
   - seaborn
   - plotly
+  - altair          # Needed for certain Streamlit charts
+  - bokeh           # Optional for interactive charts
 
-  # pip-only (or safer via pip on Cloud)
+  # Machine learning
+  - scikit-learn
+  - xgboost
+  - lightgbm
+
+  # Model evaluation and statistics
+  - statsmodels
+  - shap
+
+  # Data persistence, serialization, and IO
+  - joblib          # For saving/loading models
+  - cloudpickle     # Compatible with sklearn pipelines
+  - openpyxl        # Excel file support
+  - pyarrow         # Parquet/Feather
+  - xlrd            # Legacy Excel
+  - requests        # Web/API access
+
+  # Text handling / NLP (if needed)
+  - nltk
+  - textblob
+
+  # General utilities
+  - ipywidgets
+  - jinja2
+  - tqdm
+  - rich
+  - pyyaml
+
+  # Development, linting, formatting
+  - black
+  - ruff
+  - isort
+  - pre-commit
+
+  # Git / Notebook management
+  - pip
+  - nbdime
+
+  # Streamlit and web app dependencies
+  - streamlit
+  - watchdog            # Prevents reload issues on mac/linux
+  - uvicorn             # (optional) useful for local API serving
+  - aiohttp             # Backend async dependencies
+  - python-dotenv       # For any environment variables or secrets
+  - pillow              # For loading images/logos in the app
+
+  # Optional but commonly used with Streamlit
+  - regex               # Better text parsing if needed
+  - pandas-profiling    # Optional, if you want profiling inside app
+
+  # pip-only packages
   - pip:
-      - xgboost
-      - lightgbm
-      - shap
-      - streamlit-option-menu
-      - plotly-express
+      - nbstripout
+      - jupytext
+      - ydata-profiling
+      - streamlit-option-menu   # Great sidebar navigation
+      - plotly-express          # Explicit package (used in charts)
