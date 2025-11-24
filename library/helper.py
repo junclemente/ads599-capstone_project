@@ -2,7 +2,7 @@ import re
 
 import numpy as np
 import pandas as pd
-
+from pathlib import Path
 
 def load_cde_txt(path, sep="\t", encoding="latin1"):
     return pd.read_csv(path, sep=sep, dtype=str, encoding=encoding)
@@ -214,55 +214,6 @@ def clean_columns(df):
     )
     return df
 
-
-# def rpkl(folder_path, filename, show_cols=True):
-#     """
-#     Read and clean a pickle file into a standardized pandas DataFrame.
-
-#     Parameters
-#     ----------
-#     folder_path : Path or str
-#         Folder containing the pickle file.
-#     filename : str
-#         Name of the pickle file.
-#     show_cols : bool, default=True
-#         Whether to print the cleaned column list.
-
-#     Returns
-#     -------
-#     pd.DataFrame
-#         Cleaned DataFrame with standardized column names.
-#     """
-#     # Read pickle file
-#     df = pd.read_pickle(folder_path / filename)
-
-#     # Clean column names
-#     df.columns = (
-#         df.columns
-#         .str.strip()             # remove leading/trailing spaces
-#         .str.lower()             # lowercase
-#         .str.replace(r"\s+", "_", regex=True)  # replace whitespace with _
-#         .str.replace(r"[^\w_]", "", regex=True) # remove non-alphanumeric chars
-#     )
-
-#     # Print columns for quick inspection
-#     if show_cols:
-#         display(df.columns.tolist())
-
-#     return df
-
-
-# def build_cdscode(df, county_col, district_col, school_col):
-#     cdscode = ( 
-#         df[county_col].astype(str).str.zfill(2) +
-#         df[district_col].astype(str).str.zfill(5) + 
-#         df[school_col].astype(str).str.zfill(7))
-    
-#     return cdscode 
-    
-
-import pandas as pd
-
 def rpkl(folder_path, filename, show_cols=True):
     """
     Read, clean, and standardize a pickle file into a pandas DataFrame.
@@ -387,3 +338,95 @@ def create_safety_connectedness_features(df):
     )
 
     return agg
+
+
+FIGURE_DIR = Path("../media/eda")
+
+def export_fig(fig, filename, dpi=300):
+    """
+    Save matplotlib figure to a PNG file inside the media/eda folder. 
+
+    Parameters
+    ----------
+    fig : matplotlib Figure
+        Figure object to save.
+    filename : str
+        Base file name without the .png extension.
+    dpi : int, optional
+        Resolution of saved image (default=300).
+    """
+    out_path = FIGURE_DIR / f"{filename}.png"
+    fig.savefig(out_path, dpi=dpi, bbox_inches="tight")
+    print(f"[saved] {out_path}")
+
+
+# dictionary to prettify feature names
+pretty_names = {
+    # ----- Targets / outcomes -----
+    "regular_hs_diploma_graduates_rate": "Graduation Rate (%)",
+    "graduation_rate": "Graduation Rate (%)",
+    "dropout_rate": "Dropout Rate (%)",
+    "still_enrolled_rate": "Still Enrolled After 4 Years (%)",
+    "high_grad_rate": "High Graduation Category",
+    "target_grad_category": "Graduation Outcome Category",
+
+    # ----- Enrollment / cohort -----
+    "cohortstudents": "Cohort Size (Students)",
+    "eligible_cumulative_enrollment": "Cumulative Enrollment (Eligible Students)",
+    "pct_senior_cohort": "Percent of Cohort in Grade 12",
+    "pct_hs_enrollment": "Percent of Enrollment in High School Grades",
+
+    # ----- Attendance / engagement (ABC: Attendance) -----
+    "chronicabsenteeismrate": "Chronic Absenteeism Rate (%)",
+    "unexcused_absences_percent": "Unexcused Absences (%)",
+    "outofschool_suspension_absences_percent": "Suspension Absence Rate (%)",
+
+    # ----- Socioeconomic (ABC context) -----
+    "percent__eligible_free_k12": "Percent Eligible for Free Meals",
+    "frpm_count_k12": "FRPM Student Count",
+
+    # ----- Academic preparedness / course (ABC: Course) -----
+    "met_uccsu_grad_reqs_rate": "UC/CSU A–G Completion Rate (%)",
+    "seal_of_biliteracy_rate": "Seal of Biliteracy Rate (%)",
+    "grade_retention_ratio": "Grade Retention Ratio",
+
+    # ----- Staffing ratios / resources -----
+    "stu_tch_ratio": "Student–Teacher Ratio",
+    "stu_adm_ratio": "Student–Administrator Ratio",
+    "stu_psv_ratio": "Student–Support Staff Ratio",
+
+    # ----- Teacher education attainment -----
+    "pct_associate": "Teachers with Associate Degree (%)",
+    "pct_bachelors": "Teachers with Bachelor's Degree (%)",
+    "pct_bachelors_plus": "Teachers with Bachelor's or Higher (%)",
+    "pct_master": "Teachers with Master's Degree (%)",
+    "pct_master_plus": "Teachers with Master's or Higher (%)",
+    "pct_doctorate": "Teachers with Doctorate (%)",
+    "pct_juris_doctor": "Teachers with Juris Doctor (JD) (%)",
+    "pct_no_degree": "Teachers with No Degree Reported (%)",
+
+    # ----- Teacher experience -----
+    "pct_experienced": "Experienced Teachers (%)",
+    "pct_inexperienced": "Inexperienced Teachers (%)",
+    "pct_first_year": "First-Year Teachers (%)",
+    "pct_second_year": "Second-Year Teachers (%)",
+
+    # ----- Safety / climate -----
+    "pct_unsafe_gr11": "Unsafe Perception (Grade 11) (%)",
+    "pct_safe_gr11": "Safe Perception (Grade 11) (%)",
+    "pct_neutral_gr11": "Neutral Safety Perception (Grade 11) (%)",
+    "avg_safety_score": "Average Safety Score",
+    "school_climate_index": "School Climate Index",
+
+    # ----- ID / location (if you ever plot them, but usually you won't) -----
+    "cdscode": "School CDS Code (ID)",
+    "county": "County",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+
+    # ----- School type flags -----
+    "virtual": "Virtual School Status",
+    "magnet": "Magnet School Status",
+    "yearroundyn": "Year-Round School Status",
+    "multilingual": "Multilingual Program Status",
+}
