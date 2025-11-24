@@ -39,9 +39,9 @@ The `--prune` option cleans the environment by removing packages that are no lon
 
 # Project Intro / Objective
 
-The main purpose of this project is **\_\_\_\_**. Describe the goals of the project and potential
-impacts. Mention the needs/applications of your project clearly. Limit to one/two short
-paragraph(s).
+The main purpose of this project is to develop a school-level Early Warning System (EWS) that predicts which California public high schools are at risk of low graduation outcomes using only publicly available, non-PII education datasets. Unlike traditionaly EWS system that include sensitive student-level identifiers which are protected under FERPA, this project shows that meaninful early-warning signals can be derived entirely from open data aligned to the ABC framework: Attendance (A), Behavior (B), and Course performance (C).   
+
+This work aims to give California educators, policy makers, and district leaders a scalable way to monitor emerging risk, identify structure inequities, and support strategic resource allocation. The project also contributes to the research gap on school-level predictors of graduation outcomes and evaluates whether open data can approximate the predictive capability of student-level systems.
 
 # Partner(s)/Contributor(s)
 
