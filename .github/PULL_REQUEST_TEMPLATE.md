@@ -20,10 +20,10 @@ Closes #
 
 <!-- List key changes (code, data, notebooks, visuals, docs). -->
 
-- [ ] Updated existing notebook, library or helper functions
+- [ ] Added new notebook(s)
+- [ ] Updated existing library or helper functions
 - [ ] Modified dataset or sample data
 - [ ] Updated documentation (README or comments)
-- [ ] Added new notebook(s)
 - [ ] Other (describe below)
 
 ## ✅ Checklist
