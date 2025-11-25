@@ -97,16 +97,16 @@ The goal is to provide California educators, policymakers, and district leaders 
 
 # 🛠️ Methods Used
 
-<table>
+<table style="width: 100%; border-spacing: 20px 0;">
 <tr>
-<td style="vertical-align: top; width: 50%">
+<td style="vertical-align: top; width: 50%; padding: 10px;">
 
 - Data Cleaning & Preprocessing
 - Exploratory Data Analysis (EDA)
 - Feature Engineering
 
 </td>
-<td style="vertical-align: top; width: 50%">
+<td style="vertical-align: top; width: 50%; padding: 10px;">
 
 - Predictive Modeling & ML Classification
 - Feature Selection using Random Forest
@@ -118,9 +118,9 @@ The goal is to provide California educators, policymakers, and district leaders 
 
 # 🧰 Technologies
 
-<table>
+<table style="width: 100%; border-spacing: 20px 0;">
 <tr>
-<td style="vertical-align: top; width: 50%">
+<td style="vertical-align: top; width: 50%; padding: 10px;">
 
 - Python
 - Pandas
@@ -129,7 +129,7 @@ The goal is to provide California educators, policymakers, and district leaders 
 - Seaborn
 
 </td>
-<td style="vertical-align: top; width: 50%">
+<td style="vertical-align: top; width: 50%; padding: 10px;">
 
 - Jupyter Notebook
 - VSCode
@@ -160,7 +160,7 @@ This project integrates multiple publicly accessible, non-PII datasets from the 
   - _On Track: 73.7%_
   - _At Risk: 26.3%_
 
-# 🌐 Raw Data Sources
+## 🌐 Raw Data Sources
 
 Below are the official public websites where all raw datasets used in this project can be downloaded:
 
@@ -228,10 +228,6 @@ We also appreciate the collaborative contributions of our teammates—Amayrani B
 
 # 🤖 AI Assistance Disclosure
 
-Parts of this project were developed with the help from ChatGPT (OpenAI):
+Portions of this project, including selected code snippets, debugging suggestions, and explanatory text, were developed with the assistance of ChatGPT by OpenAI. The authors used AI tools to accelerate brainstorming, refine documentation, and troubleshoot code behavior.
 
-- Debugging Python functions and pipeline logic
-- Drafting / rewriting docstrings and short notebook summaries
-- Creating small code snippets
-
-All generated code and text were reviewed and edited by the authors.
+All AI-generated material was manually reviewed, tested, and edited by the authors to ensure correctness, accuracy, and alignment with the project requirements.

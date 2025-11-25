@@ -1,4 +1,6 @@
-# 📘 **Data Dictionary: Top 15 Features**
+# 📘 Data Dictionary - Final Top 15 Features 
+
+This section documents the final **Top 15 features** selected for the Early Warning System (EWS) predictive modeling. These variables represent the strongest predictors of high school graduation outcomes based on feature importance analyses conducted during model development (Random Forest, Gradient Boosting, and correlation-based selection). Each feature listed below includes its unit type, source, construct, and its role within the ABC Early Warning framework or structural school capacity domain. This refined feature set serves as the input to the final classification models and reflects the variables most strongly associated with graduation risk across California public high schools.
 
 | Feature                      | Unit Type              | What it Measures                                            | Source / Construct      | Why it Matters (EWS/Grad Risk)                                          |
 | ---------------------------- | ---------------------- | ----------------------------------------------------------- | ----------------------- | ----------------------------------------------------------------------- |
@@ -18,10 +20,11 @@
 | `stu_psv_ratio`              | **Ratio (continuous)** | Students per pupil-services staff (counselors etc.)         | CDE Staff Assignment    | Access to support services; lower support → higher risk.                |
 | `pct_bachelors`              | **Proportion (0–1)**   | Share of teachers with a bachelor’s degree                  | CDE Staff Experience    | Baseline staff qualification indicator.                                 |
 
+---
 
-## Attendance Indicators (A)
+# Attendance Indicators (A) - Student Presence & Engagement
 
-These features capture whether studens are actually present and engaged in school. 
+These features capture whether studens are actually present and engaged in school.
 
 | Feature                      | Why It Matters                                                                                                                          |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
@@ -29,7 +32,7 @@ These features capture whether studens are actually present and engaged in schoo
 | `unexcused_absences_percent` | High unexcused absence rates indicate disengagement and weak school-family connections.                                                 |
 | `still_enrolled_rate`        | High % still enrolled after 4 years suggests delayed pathways or risk of non-completion.                                                |
 
-## Behavior and Engagement Indicators (B)
+# Behavior and Engagement Indicators (B) - Discipline, Support, and Student Stability
 
 | Feature                 | Why It Matters                                                                                                       |
 | ----------------------- | -------------------------------------------------------------------------------------------------------------------- |
@@ -37,7 +40,7 @@ These features capture whether studens are actually present and engaged in schoo
 | `grade_retention_ratio` | Grade retention is a documented early warning flag; retained students are significantly more likely to not graduate. |
 | `pct_experienced`       | Experienced teachers manage classrooms more effectively and foster engagement.                                       |
 
-## Course-Performance / Academic Indicators (C)
+# Course-Performance / Academic Indicators (C) - Coursework, Rigor, and Achievement
 
 | Feature                    | Why It Matters                                                                                   |
 | -------------------------- | ------------------------------------------------------------------------------------------------ |
@@ -46,10 +49,9 @@ These features capture whether studens are actually present and engaged in schoo
 | `pct_bachelors`            | Indicates baseline teacher preparation; impacts course delivery quality.                         |
 | `pct_senior_cohort`        | Low senior proportion can indicate earlier grade attrition.                                      |
 
+# Structural & Contextual School Factors (S) - Capacity, Resources, and Socioeconomic Risk
 
-## School Capacity & Socioeconomic Context (Structural Factors)
-
-Although these variables are not formally categorized within the ABC early warning framework, they strongly influence a school's overall ability to support at-risk students through identification and intervention. 
+Although these variables are not formally categorized within the ABC early warning framework, they strongly influence a school's overall ability to support at-risk students through identification and intervention.
 
 | Feature                      | Why It Matters                                                                                       |
 | ---------------------------- | ---------------------------------------------------------------------------------------------------- |
