@@ -1,4 +1,7 @@
-## 📘 **Data Dictionary: Modeling Dataset**
+# 📘 Data Dictionary - Modeling Dataset
+
+This data dictionary describes the final **modeling dataset** used to train and evaluate the Early Warning System (EWS) machine-learning models. After completing the initial data exploration and cleaning steps, the dataset was refined to include only validated, school-level features that aligned with the ABC framework and demonstrated analytical relevance. The fields below represent the engineered and curated variables used in all modeling experiments, including logistic regression, random forest, and gradient boosting classifiers. Each entry specifies the feature’s source, data type, definition, and its purpose within the predictive modeling workflow to ensure full transparency and reproducibility.
+
 
 | **Feature**                               | **Source**                         | **Type**         | **Description**                                                                                      | **Analytical Purpose**                                        |
 | ----------------------------------------- | ---------------------------------- | ---------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
@@ -32,11 +35,11 @@
 
 ---
 
-### 🧩 Notes:
+## 🧩 Notes:
 
-* All features are **school-level** (not county-level) aggregates.
-* Missing data were median-imputed for numeric variables and dropped for the target (`graduation_rate`).
-* Highly correlated features (`avg_safety_score`, `pct_inexperienced`, etc.) were removed prior to modeling.
-* Socioeconomic, staff quality, and engagement variables align with the **ABC framework** (Attendance, Behavior, Course performance).
+- All features represent **school-level aggregates** aligned to the ABC (Attendance–Behavior–Course) framework.
+- Missing numeric values were imputed using median substitution; rows missing the target variable (`graduation_rate`) were removed.
+- Several highly collinear or redundant features (e.g., `avg_safety_score`, `pct_inexperienced`) were removed during feature-selection and modeling.
+- The final modeling dataset reflects the cleaned, merged, and feature-engineered variables used in all classification models.
 
 ---
