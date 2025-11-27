@@ -30,14 +30,14 @@ reproducibility and consistent development. Ensure you have
 [Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/main)
 installed.
 
-**Create the Environment**
+**Create the Environment**  
 Run the following:
 
 ```bash
 conda env create -f environment.yml
 ```
 
-**Update the Environment (if needed)**
+**Update the Environment (if needed)**  
 If there are any updates to the environment, you can update the environment with the following:
 
 ```bash
@@ -48,32 +48,33 @@ The `--prune` option cleans the environment by removing packages that are no lon
 
 # ▶️ How to Run the Streamlit App
 
-## Run the Web Version
+## 🌐 Run the Web Version
 
+From the
 Click the following link to run the web version: [http://ca-early-warning-system.streamlit.app](http://ca-early-warning-system.streamlit.app)
 
+<p align="center">
+<img src="./app/assets/abcs_input_sliders.png" alt="Feature Inputs by ABCS Categories" width="600" />
+</p>
 ### Webapp Key Features
 
 🎯 School-Level Graduation Risk Prediction
 Users can interactively adjust key predictors to instantly estimate whether a school is At Risk or On Track.
 
-📊 Real-Time Model Output
+📊 Real-Time Model Output  
 The app automatically displays:
 
-Predicted risk category
-
-Model confidence / probability
+- Predicted risk category
+- Model confidence / probability
 
 🧮 Interactive Scenario Exploration
 Users can simulate “what-if” scenarios such as:
 
-What if chronic absenteeism decreases?
+- What if chronic absenteeism decreases?
+- What if FRPM eligibility drops by 10%?
+- How does the student-to-support-staff ratio impact graduation outcomes?
 
-What if FRPM eligibility drops by 10%?
-
-How does the student-to-support-staff ratio impact graduation outcomes?
-
-## Run locally
+## 💻 Run locally
 
 1. Clone this repository.
 2. Create the conda environment.
@@ -196,6 +197,47 @@ Below are the official public websites where all raw datasets used in this proje
 
 - **CalSCHLS / School Safety & Climate (County-Level Data)**  
   https://calschls.org/reports-data/query-calschls/
+
+## 🏆 Results
+
+Using the top-15 features selected through Random Forest feature importance, seven classification models were evaluated on a stratified test set (20% split). Performance was compared using the PR-AUC as the primary metric due to class imbalance, with Precision, Recall, and F1-Score also included.
+
+**Model Comparison (PR-AUC)**
+
+The highest performing models were:
+
+- **Random Forest** - PR-AUC 0.775
+- **Logistic Regression** - PR-AUC 0.763
+- **Naive Bayes** - PR-AUC 0.755
+
+**Overall Finding**
+
+Interpretability of the chosen model was not the highest priority since the predictions will not directly impact individual students. The **Random Forest** model delivered the strongest balance of precision and recall and the highest PR-AUC, making it the most reliable classifier for identifying schools `At Risk` of low graduation rates.
+
+<p align="center"> 
+<img src="./media/modeling/model_comparison_pr_auc.png" alt="Model Comparison Chart" width="600">
+</p>
+
+## 📈 Models Compared
+
+- Logistic Regression
+- Naive Bayes
+- Random Forest
+- XGBoost
+- SVM
+- Decision Tree
+- KNN
+
+Summary of model performance:  
+| Model | Precision | Recall | F1-Score | PR-AUC |
+| ----------------------- | --------- | --------- | -------- | --------- |
+| **Random Forest** | 0.720 | 0.706 | 0.713 | **0.775** |
+| **Logistic Regression** | 0.549 | **0.765** | 0.639 | **0.763** |
+| **Naive Bayes** | 0.547 | 0.686 | 0.609 | **0.755** |
+| XGBoost | 0.702 | 0.647 | 0.673 | 0.707 |
+| Decision Tree | 0.500 | 0.725 | 0.592 | 0.548 |
+| SVM | **1.000** | 0.059 | 0.111 | 0.533 |
+| KNN | 0.517 | 0.294 | 0.375 | 0.397 |
 
 # 📁 Project Structure
 
