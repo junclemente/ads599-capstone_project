@@ -460,7 +460,7 @@ def create_safety_connectedness_features(df):
 
 FIGURE_DIR = Path("../media/eda")
 
-def export_fig(fig, filename, dpi=300):
+def export_fig(fig, filename, dpi=300, outdir=None):
     """
     Save a matplotlib figure to a PNG file inside the media/eda folder.
 
@@ -477,8 +477,11 @@ def export_fig(fig, filename, dpi=300):
     -----
     Docstring generated with assistance from ChatGPT.
     """
-    out_path = FIGURE_DIR / f"{filename}.png"
+    target_dir = Path(outdir) if outdir else FIGURE_DIR 
+
+    out_path = target_dir / f"{filename}.png"
     fig.savefig(out_path, dpi=dpi, bbox_inches="tight")
+    
     print(f"[saved] {out_path}")
 
 
