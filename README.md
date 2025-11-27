@@ -46,17 +46,36 @@ conda env update -f environment.yml --prune
 
 The `--prune` option cleans the environment by removing packages that are no longer required.
 
+# 📁 Project Structure
+
+```
+msads_capstone/
+├── app/
+├── data/
+├── docs/
+├── library/
+├── media/
+├── models/
+├── other_material/
+├── .github/
+├── environment.yml
+├── main_notebook.ipynb
+├── CONTRIBUTING.md
+├── LICENSE
+└── README.md
+```
+
 # ▶️ How to Run the Streamlit App
 
 ## 🌐 Run the Web Version
 
-From the
 Click the following link to run the web version: [http://ca-early-warning-system.streamlit.app](http://ca-early-warning-system.streamlit.app)
+
+### Webapp Key Features
 
 <p align="center">
 <img src="./app/assets/abcs_input_sliders.png" alt="Feature Inputs by ABCS Categories" width="600" />
 </p>
-### Webapp Key Features
 
 🎯 School-Level Graduation Risk Prediction
 Users can interactively adjust key predictors to instantly estimate whether a school is At Risk or On Track.
@@ -165,6 +184,10 @@ This project integrates multiple publicly accessible, non-PII datasets from the 
 
 Below are the official public websites where all raw datasets used in this project can be downloaded:
 
+<table style="width: 100%; border-spacing: 20px 0;">
+<tr>
+<td style="vertical-align: top; width: 50%; padding: 10px;">
+
 - **Adjusted Cohort Graduation Rate (ACGR)**  
   https://www.cde.ca.gov/ds/ad/filesacgr.asp
 
@@ -183,6 +206,9 @@ Below are the official public websites where all raw datasets used in this proje
 - **CBEDS – School & District Information**  
   https://www.cde.ca.gov/ds/ad/filescbedsorab.asp
 
+</td>
+<td style="vertical-align: top; width: 50%; padding: 10px;">  
+
 - **Student–Staff Ratios**  
   https://www.cde.ca.gov/ds/ad/fsstrat.asp
 
@@ -197,6 +223,9 @@ Below are the official public websites where all raw datasets used in this proje
 
 - **CalSCHLS / School Safety & Climate (County-Level Data)**  
   https://calschls.org/reports-data/query-calschls/
+</td>
+</tr>
+</table> 
 
 ## 🏆 Results
 
@@ -212,13 +241,15 @@ The highest performing models were:
 
 **Overall Finding**
 
-Interpretability of the chosen model was not the highest priority since the predictions will not directly impact individual students. The **Random Forest** model delivered the strongest balance of precision and recall and the highest PR-AUC, making it the most reliable classifier for identifying schools `At Risk` of low graduation rates.
+Interpretability of the chosen model was not the highest priority since the predictions do not directly impact individual students. The **Random Forest** model delivered the strongest balance of precision and recall and the highest PR-AUC, making it the most reliable classifier for identifying schools `At Risk` of low graduation rates.
 
 <p align="center"> 
 <img src="./media/modeling/model_comparison_pr_auc.png" alt="Model Comparison Chart" width="600">
 </p>
 
 ## 📈 Models Compared
+
+The following models were tested to compare predictive effectiveness under class imbalance conditions using PR-AUC as the primary evaluatoin metric.
 
 - Logistic Regression
 - Naive Bayes
@@ -239,25 +270,6 @@ Summary of model performance:
 | SVM | **1.000** | 0.059 | 0.111 | 0.533 |
 | KNN | 0.517 | 0.294 | 0.375 | 0.397 |
 
-# 📁 Project Structure
-
-```
-msads_capstone/
-├── app/
-├── data/
-├── docs/
-├── library/
-├── media/
-├── models/
-├── other_material/
-├── .github/
-├── environment.yml
-├── main_notebook.ipynb
-├── CONTRIBUTING.md
-├── LICENSE
-└── README.md
-```
-
 # 📄 License
 
 This project is licensed under the [MIT License](./LICENSE).
@@ -273,3 +285,21 @@ We also appreciate the collaborative contributions of our teammates—Amayrani B
 Portions of this project, including selected code snippets, debugging suggestions, and explanatory text, were developed with the assistance of ChatGPT by OpenAI. The authors used AI tools to accelerate brainstorming, refine documentation, and troubleshoot code behavior.
 
 All AI-generated material was manually reviewed, tested, and edited by the authors to ensure correctness, accuracy, and alignment with the project requirements.
+
+# 📚 References
+
+Austin, G., Hanson, T., Bala, N., & Zheng, C. (2023). Student engagement and well-being in California, 2019-21: Results of the Eighteenth Biennial State California Healthy Kids Survey, Grades 7, 9, and 11. WestEd. https://data.calschls.org/resources/18th_Biennial_State_1921.pdf
+
+California Department of Education. (n.d.). Retrieved October 26, 2025, from https://www.cde.ca.gov/
+
+Chen, T., Wanberg, R. C., Gouioa, E. T., Brown, M. J. S., Chen, J. C.-Y., & Kurt Kraiger, J. J. (2019). Engaging parents Involvement in K – 12 Online Learning Settings: Are We Meeting the Needs of Underserved Students? Journal of E-Learning and Knowledge Society, Vol 15 No 2 (2019): Journal of eLearning and Knowledge Society. https://doi.org/10.20368/1971-8829/1563
+
+Cobb, C. D. (2020). Geospatial Analysis: A New Window Into Educational Equity, Access, and Opportunity. Review of Research in Education, 44(1), 97–129. https://doi.org/10.3102/0091732X20907362
+
+Rumberger, R., Addis, H., Allensworth, E., Balfanz, R., Bruch, J., Dillon, E., Duardo, D., Dynarski, M., Furgeson, J., Jayanthi, M., Newman-Gonchar, R., Place, K., & Tuttle, C. (2017). Preventing Dropout in Secondary Schools (No. NCEE 2017-4028). National Center for Education Evaluation and Regional Assistance (NCEE), Institute of Education Sciences, U.S. Department of Education. https://whatworks.ed.gov
+
+Sava, S., Bunoiu, M., & Malita, L. (2017). Ways to Improve Students’ Decision for Academic Studies. Acta Didactica Napocensia, 10(4), 109–120. https://doi.org/10.24193/adn.10.4.11
+
+Siegle, D., Gubbins, E. J., O’Rourke, P., Langley, S. D., Mun, R. U., Luria, S. R., Little, C. A., McCoach, D. B., Knupp, T., Callahan, C. M., & Plucker, J. A. (2016). Barriers to Underserved Students’ Participation in Gifted Programs and Possible Solutions. Journal for the Education of the Gifted, 39(2), 103–131. https://doi.org/10.1177/0162353216640930
+
+The California School Climate, Health, and Learning Survey (CalSCHLS) System—Home. (n.d.). Retrieved October 26, 2025, from https://calschls.org/
