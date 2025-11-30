@@ -1,6 +1,29 @@
-# 📘 Data Dictionary - Final Top 15 Features 
+# 📘 Data Dictionary - Final Top 15 Features
 
-This section documents the final **Top 15 features** selected for the Early Warning System (EWS) predictive modeling. These variables represent the strongest predictors of high school graduation outcomes based on feature importance analyses conducted during model development (Random Forest, Gradient Boosting, and correlation-based selection). Each feature listed below includes its unit type, source, construct, and its role within the ABC Early Warning framework or structural school capacity domain. This refined feature set serves as the input to the final classification models and reflects the variables most strongly associated with graduation risk across California public high schools.
+This data dictionary summarizes all variables included in the final exported dataset used for modeling, evaluation, and deployment in the California Early Warning System (EWS). The dataset contains three groups of fields:
+
+1. **Identifier variables** (e.g., CDS code, school, district, geographic coordinates) used for interpretability, mapping, and Streamlit display but excluded from model training.
+
+2. **Outcome variables**, including the continuous four-year graduation rate and the final binary target (low_grad_rate) used for classification.
+
+3. The **Top 15 predictive features**, selected through Random Forest feature importance, correlation analysis, and model comparison. These features represent the strongest indicators of graduation risk and align with the ABC Early Warning framework (Attendance, Behavior, Course Performance) or structural school capacity domains.
+
+Together, these variables form the complete structured dataset used for the EWS modeling pipeline and final application.
+
+## Identifiers and Target Variables (Included in final dataset)
+
+| Column            | Type            | Description                                                                                 |
+| ----------------- | --------------- | ------------------------------------------------------------------------------------------- |
+| `cdscode`         | String          | 14-digit California Department of Education (CDE) unique school identifier.                 |
+| `county`          | String          | County where the school is located.                                                         |
+| `district`        | String          | School district name.                                                                       |
+| `school`          | String          | School name.                                                                                |
+| `latitude`        | Float           | Latitude coordinate of the school (used for mapping and app visualization).                 |
+| `longitude`       | Float           | Longitude coordinate of the school.                                                         |
+| `graduation_rate` | Percent (0–100) | Four-year Adjusted Cohort Graduation Rate (ACGR).                                           |
+| `low_grad_rate`   | Binary (0/1)    | **Final modeling target**: 1 = <90% graduation rate (**At Risk**), 0 = ≥90% (**On Track**). |
+
+## Top 15 Features (by order of importance)
 
 | Feature                      | Unit Type              | What it Measures                                            | Source / Construct      | Why it Matters (EWS/Grad Risk)                                          |
 | ---------------------------- | ---------------------- | ----------------------------------------------------------- | ----------------------- | ----------------------------------------------------------------------- |
