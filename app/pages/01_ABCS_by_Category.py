@@ -5,21 +5,20 @@ import pandas as pd
 
 from pathlib import Path 
 from utils.paths import get_paths
+from utils.feature_config import (
+    attendance_features, 
+    behavior_features, 
+    course_features,
+    support_features, 
+    slider_settings
+)
 
 paths = get_paths()
 MODELS_DIR = paths["MODELS_DIR"]
 
 
-st.set_page_config(page_title="ABCS Predictors", layout="wide")
-st.title("ABCS Predictor Inputs")
-
-
-
-# # set paths - notebooks AND .py scripts
-# if "__file__" in globals():
-#     BASE_DIR = Path(__file__).resolve().parent
-# else:
-#     BASE_DIR = Path.cwd()
+st.set_page_config(page_title="ABCS: Category", layout="wide")
+st.title("ABC(S) Predictor Inputs")
 
 
 # print(BASE_DIR)
@@ -34,55 +33,55 @@ st.header("Feature Inputs by ABCS Categories")
 
 
 
-attendance_features = [
-    "still_enrolled_rate",
-    "chronicabsenteeismrate",
-    "unexcused_absences_percent",
-    "grade_retention_ratio"
-]
+# attendance_features = [
+#     "still_enrolled_rate",
+#     "chronicabsenteeismrate",
+#     "unexcused_absences_percent",
+#     "grade_retention_ratio"
+# ]
 
-behavior_features = [
-    "stu_psv_ratio",  # pupil-services (counselor/support)
-    "stu_adm_ratio"   # admin ratio (leadership/behavior systems)
-]
+# behavior_features = [
+#     "stu_psv_ratio",  # pupil-services (counselor/support)
+#     "stu_adm_ratio"   # admin ratio (leadership/behavior systems)
+# ]
 
-course_features = [
-    "met_uccsu_grad_reqs_rate",
-    "pct_senior_cohort",
-    "cohortstudents"
-]
+# course_features = [
+#     "met_uccsu_grad_reqs_rate",
+#     "pct_senior_cohort",
+#     "cohortstudents"
+# ]
 
-support_features = [
-    "pct_experienced",
-    "stu_tch_ratio",
-    "percent__eligible_free_k12",
-    "frpm_count_k12",
-    "pct_bachelors_plus",
-    "pct_bachelors"
-]
+# support_features = [
+#     "pct_experienced",
+#     "stu_tch_ratio",
+#     "percent__eligible_free_k12",
+#     "frpm_count_k12",
+#     "pct_bachelors_plus",
+#     "pct_bachelors"
+# ]
 
-# slider settings 
+# # slider settings 
 
-slider_settings = {
-    "still_enrolled_rate":        {"min": 0.0, "max": 20.0, "default": 5.0, "label": "Still Enrolled Rate (%)"},
-    "chronicabsenteeismrate":     {"min": 0.0, "max": 90.0, "default": 15.0, "label": "Chronic Absenteeism (%)"},
-    "unexcused_absences_percent": {"min": 0.0, "max": 100.0, "default": 25.0, "label": "Unexcused Absences (%)"},
-    "grade_retention_ratio":      {"min": 0.0, "max": 3.0, "default": 1.0,  "label": "Grade Retention Ratio"},
+# slider_settings = {
+#     "still_enrolled_rate":        {"min": 0.0, "max": 20.0, "default": 5.0, "label": "Still Enrolled Rate (%)"},
+#     "chronicabsenteeismrate":     {"min": 0.0, "max": 90.0, "default": 15.0, "label": "Chronic Absenteeism (%)"},
+#     "unexcused_absences_percent": {"min": 0.0, "max": 100.0, "default": 25.0, "label": "Unexcused Absences (%)"},
+#     "grade_retention_ratio":      {"min": 0.0, "max": 3.0, "default": 1.0,  "label": "Grade Retention Ratio"},
 
-    "stu_psv_ratio":              {"min": 0.0, "max": 4000.0, "default": 300.0, "label": "Students per Support Staff"},
-    "stu_adm_ratio":              {"min": 0.0, "max": 2500.0, "default": 400.0, "label": "Students per Admin"},
+#     "stu_psv_ratio":              {"min": 0.0, "max": 4000.0, "default": 300.0, "label": "Students per Support Staff"},
+#     "stu_adm_ratio":              {"min": 0.0, "max": 2500.0, "default": 400.0, "label": "Students per Admin"},
 
-    "met_uccsu_grad_reqs_rate":   {"min": 0.0, "max": 100.0, "default": 60.0, "label": "Met UC/CSU Requirements (%)"},
-    "pct_senior_cohort":          {"min": 0.0, "max": 1.0,   "default": 0.50, "label": "Pct Seniors (0–1)"},
-    "cohortstudents":             {"min": 0,   "max": 1200,  "default": 400,  "label": "Cohort Size"},
+#     "met_uccsu_grad_reqs_rate":   {"min": 0.0, "max": 100.0, "default": 60.0, "label": "Met UC/CSU Requirements (%)"},
+#     "pct_senior_cohort":          {"min": 0.0, "max": 1.0,   "default": 0.50, "label": "Pct Seniors (0–1)"},
+#     "cohortstudents":             {"min": 0,   "max": 1200,  "default": 400,  "label": "Cohort Size"},
 
-    "pct_experienced":            {"min": 0.0, "max": 1.0,   "default": 0.85, "label": "Pct Experienced Teachers (0–1)"},
-    "stu_tch_ratio":              {"min": 3.0, "max": 40.0,  "default": 22.0, "label": "Student–Teacher Ratio"},
-    "percent__eligible_free_k12": {"min": 0.0, "max": 1.0,   "default": 0.50, "label": "FRPM Eligible (0–1)"},
-    "frpm_count_k12":             {"min": 0,   "max": 4000,  "default": 800,  "label": "FRPM Count"},
-    "pct_bachelors_plus":         {"min": 0.0, "max": 1.0,   "default": 0.25, "label": "Pct Bachelor’s+ (0–1)"},
-    "pct_bachelors":              {"min": 0.0, "max": 1.0,   "default": 0.25, "label": "Pct Bachelor’s (0–1)"},
-}
+#     "pct_experienced":            {"min": 0.0, "max": 1.0,   "default": 0.85, "label": "Pct Experienced Teachers (0–1)"},
+#     "stu_tch_ratio":              {"min": 3.0, "max": 40.0,  "default": 22.0, "label": "Student–Teacher Ratio"},
+#     "percent__eligible_free_k12": {"min": 0.0, "max": 1.0,   "default": 0.50, "label": "FRPM Eligible (0–1)"},
+#     "frpm_count_k12":             {"min": 0,   "max": 4000,  "default": 800,  "label": "FRPM Count"},
+#     "pct_bachelors_plus":         {"min": 0.0, "max": 1.0,   "default": 0.25, "label": "Pct Bachelor’s+ (0–1)"},
+#     "pct_bachelors":              {"min": 0.0, "max": 1.0,   "default": 0.25, "label": "Pct Bachelor’s (0–1)"},
+# }
 
 
 
@@ -98,7 +97,7 @@ with col_A:
     for feature in attendance_features:
         s = slider_settings[feature]
         st.session_state[feature] = st.slider(
-            s["label"], s["min"], s["max"], s["default"]
+            s["label"], s["min"], s["max"], s["default"], help=s.get("description")
         )
 
 # B - Behavior / Climate Support 
@@ -107,7 +106,7 @@ with col_B:
     for feature in behavior_features:
         s = slider_settings[feature]
         st.session_state[feature] = st.slider(
-            s["label"], s["min"], s["max"], s["default"]
+            s["label"], s["min"], s["max"], s["default"], help=s.get("description")
         )
 
 # C — COURSE PERFORMANCE
@@ -116,7 +115,7 @@ with col_C:
     for feature in course_features:
         s = slider_settings[feature]
         st.session_state[feature] = st.slider(
-            s["label"], s["min"], s["max"], s["default"]
+            s["label"], s["min"], s["max"], s["default"], help=s.get("description")
         )
 
 
@@ -126,7 +125,7 @@ with col_S:
     for feature in support_features:
         s = slider_settings[feature]
         st.session_state[feature] = st.slider(
-            s["label"], s["min"], s["max"], s["default"]
+            s["label"], s["min"], s["max"], s["default"], help=s.get("description")
         )
 
 

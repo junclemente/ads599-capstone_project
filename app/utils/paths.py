@@ -1,31 +1,5 @@
 from pathlib import Path
 
-# def get_paths():
-#     """
-#     Returns base paths that work locally, in notebooks, and when deployed.
-#     """
-#     # app folder (where main.py lives)
-#     if "__file__" in globals():
-#         APP_DIR = Path(__file__).resolve().parent[1]
-#     else:
-#         # e.g., running interactively / notebook
-#         APP_DIR = Path.cwd()
-
-#     # repo root (parent of app/)
-#     ROOT_DIR = APP_DIR.parent if APP_DIR.name == "app" else APP_DIR
-
-#     ASSETS_DIR = APP_DIR / "assets"
-#     MODELS_DIR = ROOT_DIR / "models"
-#     DATA_DIR   = ROOT_DIR / "data"
-
-#     return {
-#         "APP_DIR": APP_DIR,
-#         "ROOT_DIR": ROOT_DIR,
-#         "ASSETS_DIR": ASSETS_DIR,
-#         "MODELS_DIR": MODELS_DIR,
-#         "DATA_DIR": DATA_DIR,
-#     }
-
 def get_paths():
     """
     Robust paths for local + deployed Streamlit.
