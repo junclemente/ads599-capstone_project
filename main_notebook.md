@@ -35,7 +35,7 @@ These gaps highlight the need for tools that can scale, protect student privacy,
 
 ## Problem Statement
 
-California continues to see large graps in graduation rates, especially for English learners, foster youth, and students with disabilities. While statewide accountability tools such as the California School Dashboard report historical outcomes, they do not identify emerging risk factors or predict which schools may experience declining graduation rates.
+California continues to see large gaps in graduation rates, especially for English learners, foster youth, and students with disabilities. While statewide accountability tools such as the California School Dashboard report historical outcomes, they do not identify emerging risk factors or predict which schools may experience declining graduation rates.
 
 District-level Early Warning Systems exist, but they rely on restricted student-level data protected under FERPA, which limits access for researchers, policymakers, and education stakeholders. As a result, California does not have a scalable, publicly accessible method for assessing school-level graduation risk.
 
@@ -112,7 +112,7 @@ This analysis focuses on developing a school-level Early Warning System (EWS) fo
 - **Schools without valid ACGR data:**  
   Schools missing graduation rates or reporting fewer than 90% of expected cohort enrollment were removed for data quality.
 - **Limited climate data availability:**  
-  The most recent CalSCHLS climiate indicators (2017-2019) were explored during EDA, but excluded from the final model because seven counties did not have any data and the variables did not improve predictive performance.
+  The most recent CalSCHLS climate indicators (2017-2019) were explored during EDA, but excluded from the final model because seven counties did not have any data and the variables did not improve predictive performance.
 - **Non-high school institutions:**  
   Middle schools, continuation schools, juvenile court schools, and alternative education programs were excluded.
 - **Model optimization:**  
