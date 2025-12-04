@@ -2,7 +2,13 @@ import streamlit as st
 import pandas as pd
 from utils.feature_config import slider_settings
 
-st.title("Data Dictionary – Top 15 Features")
+st.set_page_config(
+    page_title="Data Dictionary",
+    page_icon="📚",
+    layout="wide"
+)
+
+st.title("📚 Data Dictionary")
 
 df = pd.DataFrame([
     {

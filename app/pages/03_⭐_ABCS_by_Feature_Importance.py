@@ -11,10 +11,6 @@ paths = get_paths()
 MODELS_DIR = paths["MODELS_DIR"]
 
 
-st.set_page_config(page_title="ABCS: Feature Importance", layout="wide")
-st.title("ABC(S) Predictor Inputs")
-
-
 # print(BASE_DIR)
 MODEL_PATH = MODELS_DIR / "random_forest_ews.pkl"
 FEATURE_PATH = MODELS_DIR / "top_features.pkl"
@@ -23,6 +19,13 @@ FEATURE_PATH = MODELS_DIR / "top_features.pkl"
 top_features = joblib.load(FEATURE_PATH)
 model = joblib.load(MODEL_PATH)
 
+st.set_page_config(
+    page_title="ABCS by Feature Importance",
+    page_icon="⭐",
+    layout="wide"
+)
+
+st.title("⭐ ABCS by Feature Importance")
 st.header("Feature Inputs by Order of Importance")
 
 
