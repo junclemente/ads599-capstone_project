@@ -1,22 +1,21 @@
-#import libraries 
+# import libraries 
 import streamlit as st
 import joblib 
 import pandas as pd 
 
-from pathlib import Path 
 from utils.paths import get_paths
 from utils.feature_config import (
     attendance_features, 
     behavior_features, 
     course_features,
     support_features, 
-    slider_settings
+    slider_settings,
 )
+from utils.randomizer import randomize_feature_values
 
 paths = get_paths()
 MODELS_DIR = paths["MODELS_DIR"]
 
-# print(BASE_DIR)
 MODEL_PATH = MODELS_DIR / "random_forest_ews.pkl"
 FEATURE_PATH = MODELS_DIR / "top_features.pkl"
 
@@ -27,75 +26,116 @@ model = joblib.load(MODEL_PATH)
 st.set_page_config(
     page_title="ABCS by Category",
     page_icon="📊",
-    layout="wide"
+    layout="wide",
 )
 
 st.title("📊 ABCS by Category")
 st.header("Feature Inputs by ABCS Category")
 
+# All features on this page (for randomizer + model input)
+all_features = (
+    attendance_features
+    + behavior_features
+    + course_features
+    + support_features
+)
+
+# --- Randomize Inputs button ---
+col_label, col_btn = st.columns([4, 1])
+
+with col_label:
+    st.markdown(
+        "Adjust the ABCS sliders to explore different scenarios, "
+        "or click **Randomize Inputs** to sample a new combination."
+    )
+
+with col_btn:
+    if st.button("🎲 Randomize Inputs"):
+        # keys for sliders are just the feature names (no prefix)
+        randomize_feature_values(
+            all_features,
+            slider_settings,
+            key_prefix="",   # randomizer will write to st.session_state[feature]
+        )
+        st.rerun()
+
+# dictionary to hold slider values for model input
+feature_inputs = {}
 
 # create 4 columns
 col_A, col_B, col_C, col_S = st.columns(4)
-
-# dictionary to hold slider values 
-feature_inputs = {}
 
 # A - Attendance
 with col_A:
     st.subheader("A: Attendance")
     for feature in attendance_features:
         s = slider_settings[feature]
-        st.session_state[feature] = st.slider(
-            s["label"], s["min"], s["max"], s["default"], help=s.get("description")
+        value = st.slider(
+            s["label"],
+            s["min"],
+            s["max"],
+            # use randomized or previous value if present, otherwise default
+            value=st.session_state.get(feature, s["default"]),
+            help=s.get("description"),
+            key=feature,
         )
+        feature_inputs[feature] = value
 
 # B - Behavior / Climate Support 
 with col_B:
     st.subheader("B: Behavior")
     for feature in behavior_features:
         s = slider_settings[feature]
-        st.session_state[feature] = st.slider(
-            s["label"], s["min"], s["max"], s["default"], help=s.get("description")
+        value = st.slider(
+            s["label"],
+            s["min"],
+            s["max"],
+            value=st.session_state.get(feature, s["default"]),
+            help=s.get("description"),
+            key=feature,
         )
+        feature_inputs[feature] = value
 
-# C — COURSE PERFORMANCE
+# C — Course Performance
 with col_C:
     st.subheader("C: Course")
     for feature in course_features:
         s = slider_settings[feature]
-        st.session_state[feature] = st.slider(
-            s["label"], s["min"], s["max"], s["default"], help=s.get("description")
+        value = st.slider(
+            s["label"],
+            s["min"],
+            s["max"],
+            value=st.session_state.get(feature, s["default"]),
+            help=s.get("description"),
+            key=feature,
         )
+        feature_inputs[feature] = value
 
-
-# S — SCHOOL / CONTEXT SUPPORTS
+# S — School / Context Supports
 with col_S:
     st.subheader("S: Supports")
     for feature in support_features:
         s = slider_settings[feature]
-        st.session_state[feature] = st.slider(
-            s["label"], s["min"], s["max"], s["default"], help=s.get("description")
+        value = st.slider(
+            s["label"],
+            s["min"],
+            s["max"],
+            value=st.session_state.get(feature, s["default"]),
+            help=s.get("description"),
+            key=feature,
         )
+        feature_inputs[feature] = value
 
+# ----- Model prediction -----
 
-# Model prediction 
-
-# create dataframe of values
+# create dataframe of values in correct order
 input_df = pd.DataFrame({
-    feature: [st.session_state[feature]]
-    for feature in (
-        attendance_features +
-        behavior_features + 
-        course_features + 
-        support_features
-    )
+    feature: [feature_inputs[feature]]
+    for feature in all_features
 })
 
 # reorder feature values to match top_features and as expected by model
 input_df = input_df.reindex(columns=top_features)
-
-# debug check if df features matches model
-# st.write("Order matches:", list(input_df.columns) == top_features)
 
 st.divider()
 
@@ -104,8 +144,7 @@ risk_label = "At Risk" if prediction == 1 else "On Track"
 st.subheader(f"Model Prediction: {risk_label}")
 
 probability = model.predict_proba(input_df)[0][1]
-st.write(f"Risk Probability: {round(probability * 100,1)}%")
-# st.progress(probability)
+st.write(f"Risk Probability: {round(probability * 100, 1)}%")
 
 st.divider() 
 
@@ -135,7 +174,8 @@ with colC:
     st.subheader("C: Course")
     st.markdown(
         """
-        Course performance measures student progress toward graduation expectations — including UC/CSU requirements, senior cohort progression, and credit completion.
+        Course performance measures student progress toward graduation expectations — including UC/CSU requirements, 
+        senior cohort progression, and credit completion.
         """
     )
 
@@ -143,6 +183,7 @@ with colS:
     st.subheader("S: Supports")
     st.markdown(
         """
-        School supports represent the resources available to students: experienced teachers, reasonable class sizes, and the socioeconomic context of the school community.
+        School supports represent the resources available to students: experienced teachers, reasonable class sizes, 
+        and the socioeconomic context of the school community.
         """
     )
