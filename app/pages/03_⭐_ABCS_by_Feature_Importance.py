@@ -30,6 +30,12 @@ st.header("Feature Inputs by Order of Importance")
 # Filter ordered features to only those with slider settings
 ordered_features = [f for f in top_features if f in slider_settings]
 
+# ---- Initialize session_state defaults for all features (using imp_ prefix) ----
+for feature in ordered_features:
+    key = f"imp_{feature}"
+    if key not in st.session_state:
+        st.session_state[key] = slider_settings[feature]["default"]
+
 # --- Randomize Inputs button ---
 col_label, col_btn = st.columns([4, 1])
 
@@ -44,7 +50,7 @@ with col_btn:
         randomize_feature_values(
             ordered_features,
             slider_settings,
-            key_prefix="imp_",    # matches st.slider keys (imp_feature_name)
+            key_prefix="imp_",    # matches slider keys (imp_feature_name)
         )
         st.rerun()
 
@@ -55,11 +61,12 @@ cols = [col1, col2, col3]
 # dict to store slider values
 feature_values = {}
 
-# Render sliders with randomized or previous values
+# Render sliders (session_state owns the value)
 for i, feature in enumerate(ordered_features):
     col_idx = i // 5
     rank = i + 1
     s = slider_settings[feature]
+    key = f"imp_{feature}"
 
     with cols[col_idx]:
         st.markdown(f"**{rank}. {s['label']}**")
@@ -68,13 +75,11 @@ for i, feature in enumerate(ordered_features):
             "",
             s["min"],
             s["max"],
-            value=st.session_state.get(f"imp_{feature}", s["default"]),
+            key=key,                       # no value=; uses st.session_state[key]
             help=s.get("description"),
-            key=f"imp_{feature}",
         )
 
         feature_values[feature] = value
-
 
 # ----- Model prediction -----
 
@@ -94,6 +99,6 @@ risk_label = "At Risk" if prediction == 1 else "On Track"
 st.subheader(f"Model Prediction: {risk_label}")
 
 probability = model.predict_proba(input_df)[0][1]
-st.write(f"Risk Probability: {round(probability * 100,1)}%")
+st.write(f"Risk Probability: {round(probability * 100, 1)}%")
 
 st.divider()

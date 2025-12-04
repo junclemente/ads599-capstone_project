@@ -29,10 +29,11 @@ st.set_page_config(
     layout="wide",
 )
 
+
 st.title("📊 ABCS by Category")
 st.header("Feature Inputs by ABCS Category")
 
-# All features on this page (for randomizer + model input)
+# All features on this page (for initialization, randomizer, and model input)
 all_features = (
     attendance_features
     + behavior_features
@@ -40,26 +41,31 @@ all_features = (
     + support_features
 )
 
+# ---- Initialize session_state defaults for all features ----
+for feature in all_features:
+    if feature not in st.session_state:
+        st.session_state[feature] = slider_settings[feature]["default"]
+
 # --- Randomize Inputs button ---
 col_label, col_btn = st.columns([4, 1])
 
 with col_label:
     st.markdown(
-        "Adjust the ABCS sliders to explore different scenarios, "
-        "or click **Randomize Inputs** to sample a new combination."
+        "Adjust the ABCS sliders to explore different scenarios, or click "
+        "**Randomize Inputs** to sample a new combination."
     )
 
 with col_btn:
     if st.button("🎲 Randomize Inputs"):
-        # keys for sliders are just the feature names (no prefix)
+        # Randomizer writes directly to st.session_state[feature]
         randomize_feature_values(
             all_features,
             slider_settings,
-            key_prefix="",   # randomizer will write to st.session_state[feature]
+            key_prefix="",   # keys are just the feature names
         )
         st.rerun()
 
-# dictionary to hold slider values for model input
+# dict to hold slider values for model input
 feature_inputs = {}
 
 # create 4 columns
@@ -74,10 +80,8 @@ with col_A:
             s["label"],
             s["min"],
             s["max"],
-            # use randomized or previous value if present, otherwise default
-            value=st.session_state.get(feature, s["default"]),
+            key=feature,                     # NO value=, uses session_state[feature]
             help=s.get("description"),
-            key=feature,
         )
         feature_inputs[feature] = value
 
@@ -90,9 +94,8 @@ with col_B:
             s["label"],
             s["min"],
             s["max"],
-            value=st.session_state.get(feature, s["default"]),
-            help=s.get("description"),
             key=feature,
+            help=s.get("description"),
         )
         feature_inputs[feature] = value
 
@@ -105,9 +108,8 @@ with col_C:
             s["label"],
             s["min"],
             s["max"],
-            value=st.session_state.get(feature, s["default"]),
-            help=s.get("description"),
             key=feature,
+            help=s.get("description"),
         )
         feature_inputs[feature] = value
 
@@ -120,21 +122,18 @@ with col_S:
             s["label"],
             s["min"],
             s["max"],
-            value=st.session_state.get(feature, s["default"]),
-            help=s.get("description"),
             key=feature,
+            help=s.get("description"),
         )
         feature_inputs[feature] = value
 
 # ----- Model prediction -----
 
-# create dataframe of values in correct order
 input_df = pd.DataFrame({
     feature: [feature_inputs[feature]]
     for feature in all_features
 })
 
-# reorder feature values to match top_features and as expected by model
 input_df = input_df.reindex(columns=top_features)
 
 st.divider()
@@ -146,7 +145,8 @@ st.subheader(f"Model Prediction: {risk_label}")
 probability = model.predict_proba(input_df)[0][1]
 st.write(f"Risk Probability: {round(probability * 100, 1)}%")
 
-st.divider() 
+
+st.divider()
 
 st.markdown("### Understanding the ABCS Categories")
 
