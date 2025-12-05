@@ -120,11 +120,11 @@ slider_settings = {
     "pct_bachelors_plus": {
         "min": 0.0, "max": 1.0, "default": 0.25,
         "label": "Pct Bachelor’s+ (0–1)",
-        "description": "Share of adults in the surrounding community with a bachelor’s degree or higher.",
+        "description": "Share of teachers with education beyond a bachelor’s degree (e.g., MA or post-BA credential).",
     },
     "pct_bachelors": {
         "min": 0.0, "max": 1.0, "default": 0.25,
         "label": "Pct Bachelor’s (0–1)",
-        "description": "Share of adults in the surrounding community with at least a bachelor’s degree.",
+        "description": "Share of teachers whose highest degree is a bachelor’s.",
     },
 }
