@@ -104,7 +104,7 @@ st.divider()
 
 st.markdown(
     "<p style='text-align:center;'>"
-    "🔗 <a href='https://github.com/junclemente/ads599-capstone_project' target='_blank'>Project Repository</a>"
+    "🔗 <a href='https://github.com/junclemente/ca-early-warning-system' target='_blank'>Project Repository</a>"
     "</p>",
     unsafe_allow_html=True,
 )
