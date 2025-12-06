@@ -8,10 +8,10 @@ This project is a part of the ADS-599 course in the Applied Data Science Program
 ![Conda](https://img.shields.io/badge/Conda-Environment-green?logo=anaconda)
 ![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?logo=streamlit)
 ![Jupyter](https://img.shields.io/badge/Notebook-Jupyter-F37626?logo=jupyter)
-![Status](https://img.shields.io/badge/Status-Active-brightgreen)
+![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 ![License](https://img.shields.io/badge/License-MIT-yellow?logo=open-source-initiative)
 
--- **Project Status: Active**
+-- **Project Status: Completed**
 
 # 📦 Installation
 
@@ -50,20 +50,26 @@ The `--prune` option cleans the environment by removing packages that are no lon
 
 ```
 msads_capstone/
+├── .github/
 ├── app/
+├── code_library/
 ├── data/
 ├── docs/
-├── library/
 ├── media/
 ├── models/
-├── other_material/
-├── .github/
-├── environment.yml
-├── main_notebook.ipynb
 ├── CONTRIBUTING.md
+├── environment.yml
 ├── LICENSE
+├── main_notebook.md
 └── README.md
 ```
+
+### 📌 Notes on Project Organization
+
+> **All Jupyter notebooks are located inside the `code_library/` folder.**
+> This was intentionally kept in place to preserve stable import paths and ensure all notebooks run without modification.
+>
+> The `code_library/` folder contains both reusable Python utilities (`helper.py`) and all project notebooks for data collection, preparation, exploration, and modeling.
 
 # ▶️ How to Run the Streamlit App
 
@@ -207,7 +213,7 @@ Below are the official public websites where all raw datasets used in this proje
   https://www.cde.ca.gov/ds/ad/filescbedsorab.asp
 
 </td>
-<td style="vertical-align: top; width: 50%; padding: 10px;">  
+<td style="vertical-align: top; width: 50%; padding: 10px;">
 
 - **Student–Staff Ratios**  
   https://www.cde.ca.gov/ds/ad/fsstrat.asp
@@ -222,10 +228,10 @@ Below are the official public websites where all raw datasets used in this proje
   https://www.cde.ca.gov/ds/ad/enrolldowndata.asp
 
 - **CalSCHLS / School Safety & Climate (County-Level Data)**  
-  https://calschls.org/reports-data/query-calschls/
+ https://calschls.org/reports-data/query-calschls/
 </td>
 </tr>
-</table> 
+</table>
 
 ## 🏆 Results
 
