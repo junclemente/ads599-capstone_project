@@ -8,10 +8,10 @@ This project is a part of the ADS-599 course in the Applied Data Science Program
 ![Conda](https://img.shields.io/badge/Conda-Environment-green?logo=anaconda)
 ![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?logo=streamlit)
 ![Jupyter](https://img.shields.io/badge/Notebook-Jupyter-F37626?logo=jupyter)
-![Status](https://img.shields.io/badge/Status-Active-brightgreen)
+![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 ![License](https://img.shields.io/badge/License-MIT-yellow?logo=open-source-initiative)
 
--- **Project Status: Active**
+-- **Project Status: Completed**
 
 # 📦 Installation
 
