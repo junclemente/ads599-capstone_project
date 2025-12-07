@@ -17,7 +17,8 @@ This project is a part of the ADS-599 course in the Applied Data Science Program
 
 ### 🎥 Project Presentation (YouTube)
 
-[![Project Presentation](https://youtu.be/c_P8pGmli64?si=V9jBi1i4ZBO2alvD])](https://youtu.be/c_P8pGmli64?si=V9jBi1i4ZBO2alvD)
+[![Project Presentation](https://img.youtube.com/vi/c_P8pGmli64/0.jpg)](https://www.youtube.com/watch?v=c_P8pGmli64)
+
 
 # 📦 Installation
 
