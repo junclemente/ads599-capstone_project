@@ -13,6 +13,12 @@ This project is a part of the ADS-599 course in the Applied Data Science Program
 
 -- **Project Status: Completed**
 
+---
+
+### 🎥 Project Presentation (YouTube)
+
+[![Project Presentation](https://youtu.be/c_P8pGmli64?si=V9jBi1i4ZBO2alvD])](https://youtu.be/c_P8pGmli64?si=V9jBi1i4ZBO2alvD)
+
 # 📦 Installation
 
 To use this project, first clone the repo on your device using the command below:
