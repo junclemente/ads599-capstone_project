@@ -19,6 +19,13 @@ This project is a part of the ADS-599 course in the Applied Data Science Program
 
 [![Project Presentation](https://img.youtube.com/vi/c_P8pGmli64/0.jpg)](https://www.youtube.com/watch?v=c_P8pGmli64)
 
+### 📄 Whitepaper / Final Report
+
+You can read the full capstone whitepaper here:
+
+➡️ **[California Early Warning System – Final Whitepaper](./main_notebook.md)**  
+
+---
 
 # 📦 Installation
 
